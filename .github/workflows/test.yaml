@@ -47,3 +47,9 @@ jobs:
                 TF_VAR_bucket_name: ${{ secrets.BUCKET_NAME }}
               run: terraform apply -auto-approve
               working-directory: terraform
+
+            - name: uploading files to s3 bucket
+              env: 
+                TF_VAR_bucket_name: ${{ secrets.BUCKET_NAME }}
+              run: |
+               aws s3 cp --recursive Portfolio-website/ s3://${{ secrets.BUCKET_NAME }}/Portfolio-website/
