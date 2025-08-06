@@ -52,4 +52,4 @@ jobs:
               env: 
                 TF_VAR_bucket_name: ${{ secrets.BUCKET_NAME }}
               run: |
-               aws s3 cp --recursive Portfolio-website/ s3://${{ secrets.BUCKET_NAME }}/Portfolio-website/
+               aws s3 cp --recursive Portfolio-website/ s3://${{ secrets.BUCKET_NAME }}/
