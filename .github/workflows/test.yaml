@@ -1,4 +1,4 @@
-name: Test
+name: Listing s3 buckets
 
 on:
     push:
@@ -6,9 +6,23 @@ on:
             - main
     workflow_dispatch:
 
+permissions:
+    id-token: write
+    contents: read
+
 jobs:
-    log_message:
+    listing_buckets:
         runs-on: ubuntu-latest
         steps:
-            - name: Log
-              run: echo "The workflow is working"
+            - name: Set up aws creds
+              uses: aws-actions/configure-aws-credentials@v4.3.1
+              with:
+                role-to-assume: ${{ secrets.IAM_ROLE }}
+                aws-region: ${{ secrets.AWS_REGION }}
+            
+            - name: list s3 buckets
+              env:
+                aws_region: ${{ secrets.AWS_REGION }}
+              run:
+                echo "Listing s3 Buckets"
+                aws s3 ls
