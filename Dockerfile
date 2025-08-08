@@ -1,2 +1,2 @@
 FROM nginx
-COPY . /usr/share/nginx/html
+COPY /home/ubuntu/portfolio /usr/share/nginx/html
